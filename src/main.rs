@@ -21,5 +21,12 @@ fn main() {
     }
 
     // Add your processing logic here
-    println!("Solidity file: {}", cli.sol);
+    match &cli.sol {
+        s if s.ends_with(".sol") => {
+            println!("Solidity file: {}", cli.sol);
+        }
+        _ => {
+            println!("Not a Solidity file: {}", cli.sol);
+        }
+    }
 }
