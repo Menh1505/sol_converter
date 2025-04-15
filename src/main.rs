@@ -1,4 +1,5 @@
 use clap::Parser;
+use std::path::Path;
 
 /// A CLI tool for sol_convert
 #[derive(Parser)]
@@ -23,10 +24,17 @@ fn main() {
     // Add your processing logic here
     match &cli.sol {
         s if s.ends_with(".sol") => {
-            println!("Solidity file: {}", cli.sol);
+            let path = Path::new(s);
+            if path.exists() {
+                println!("Found Solidity file: {}", cli.sol);
+            } else {
+                println!("Error: File does not exist: {}", cli.sol);
+                std::process::exit(1);
+            }
         }
         _ => {
             println!("Not a Solidity file: {}", cli.sol);
+            std::process::exit(1);
         }
     }
 }
