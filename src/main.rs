@@ -4,13 +4,9 @@ use clap::Parser;
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 struct Cli {
-    /// The input file to process
-    #[arg(short, long)]
-    input: String,
-
-    /// The output file to write to
-    #[arg(short, long)]
-    output: String,
+    /// Path to the Solidity (.sol) file
+    #[arg(long)]
+    sol: String,
 
     /// Optional: Enable verbose mode
     #[arg(short, long, default_value_t = false)]
@@ -21,10 +17,9 @@ fn main() {
     let cli = Cli::parse();
 
     if cli.verbose {
-        println!("Processing {} -> {}", cli.input, cli.output);
+        println!("Processing {}", cli.sol);
     }
 
     // Add your processing logic here
-    println!("Input file: {}", cli.input);
-    println!("Output file: {}", cli.output);
+    println!("Solidity file: {}", cli.sol);
 }
